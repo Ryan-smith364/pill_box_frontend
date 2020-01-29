@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import { Switch, Route} from 'react-router-dom'
+import Navbar from  './components/Navbar'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// Route, Redirect,
+
+
+
+export default  class App extends React.Component{
+
+  componentDidMount(){
+    fetch('http://localhost:3000/pills')
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+  }
+
+  render(){
+    return (
+      <React.Fragment>
+
+        <Navbar/>
+
+        <Switch>
+          <Route/> log
+          <Route/> sign
+          <Route/> home
+          <Route/> singlepill
+          <Route/> pillsearch
+          <Route/> singlelist
+          <Route/> listlist
+          <Route/> listform
+        </Switch>
+      </React.Fragment>
+    )
+  }
 }
 
-export default App;
+
