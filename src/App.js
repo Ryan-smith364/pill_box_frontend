@@ -36,14 +36,14 @@ export default  class App extends React.Component{
         <Navbar/>
         
          <Switch>
-          <Route path='/' component={Home}/> 
-          <Route path='/login'component={Login}/> 
-          <Route path='/signup'component={Signup}/> 
-          <Route path='/pills/display/:id'component={PillDisplay}/> 
-          <Route path='/pills/search'component={PillSearch}/> 
-          <Route path='/lists/display/:id'component={ListDisplay}/> 
-          <Route path='/lists/display'component={ListsDisplay}/>
-          <Route path='/new-pill-list'component={ListForm}/> 
+          <Route path='/' render={() => <Home/>}/> 
+          <Route path='/login'render={() => <Login/>}/> 
+          <Route path='/signup'render={() => <Signup/>}/> 
+          <Route path='/singlepill'render={() => <PillDisplay/>}/> 
+          <Route path='/pills/search'render={() => <PillSearch/>}/> 
+          <Route path='/singlelist'render={() => <ListDisplay/>}/> 
+          <Route path='/lists/display'render={() => <ListsDisplay/>}/>
+          <Route path='/new-pill-list'render={() => <ListForm/>}/> 
 
         </Switch> 
       </React.Fragment>
