@@ -1,24 +1,25 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom'
+import { Segment, Card, Button } from 'semantic-ui-react';
 
 export default  class PillCard extends React.Component{
   render(){
     return (
-      <div class="ui card">
-         <div class="content">
+      <Card
+     
+     >   
+      <h3>{this.props.pill.name}</h3>
+      {this.props.pill.brand}
+         <Segment style={{overflow: 'auto', maxHeight: 200 }}>
+            {this.props.pill.purpose}
+         </Segment>
+         <Link to={`/pills/display/${this.props.pill.id}`}><Button content='More Info'/></Link>
+      </Card>
+    
+  
+           
 
-            <div class="header">
-               {this.props.pill.name}
-            </div>
-            <div class="meta">
-               {this.props.pill.brand}
-            </div>
-            <div class="description">
-               {this.props.pill.purpose}
-            </div>
-
-         </div>
-      </div>
+       
          
     )
   }

@@ -8,7 +8,7 @@ export default  class PillCollection extends React.Component{
     return (
       <React.Fragment>
         <Container>
-          <Card.Group>
+          <Card.Group className="stackable" itemsPerRow={4}>
              {this.props.pills.map(pill => <PillCard pill={pill}/>)}
           </Card.Group>
         </Container>

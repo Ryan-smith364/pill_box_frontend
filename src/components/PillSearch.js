@@ -7,7 +7,7 @@ export default  class PillSearch extends React.Component{
     return (
       <React.Fragment>
          <PillSearchForm/>
-
+         
          <PillCollection pills={this.props.pills}/>
       </React.Fragment>
     )

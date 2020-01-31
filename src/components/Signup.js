@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, Input} from 'semantic-ui-react'
+import { Button, Form, Input, Container} from 'semantic-ui-react'
 
 
 export default  class Signup extends React.Component{
@@ -7,6 +7,7 @@ export default  class Signup extends React.Component{
     return (
          
       <React.Fragment>
+        <Container>
          <Form onSubmit={null}>
             <Form.Group widths='equal'>
                <Form.Field
@@ -44,6 +45,7 @@ export default  class Signup extends React.Component{
                
             </Form.Group>
          </Form>
+        </Container>
       </React.Fragment>
          
     )

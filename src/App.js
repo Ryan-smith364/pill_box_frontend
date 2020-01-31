@@ -36,8 +36,8 @@ export default  class App extends React.Component{
         <Navbar/>
         
          <Switch>
-          <Route path='/lists/display/:id'component={ListDisplay}/> 
-          <Route path='/pills/display/:id'component={PillDisplay}/> 
+          <Route path={`/lists/display/:id`} component={ListDisplay}/> 
+          <Route path={`/pills/display/:id`} component={PillDisplay}/> 
           <Route path='/signup'component={Signup}/> 
           <Route path='/pills/search'render={() => <PillSearch pills={this.state.pills}/>}/> 
           <Route path='/new-pill-list'component={ListForm}/> 
