@@ -10,7 +10,7 @@ export default class Navbar extends React.Component{
          <React.Fragment>
             <Header as='h2'>
       <Header.Content>
-        <Link to='/' > PillBoii </Link>
+        <Link to='/' > PillBox </Link>
         <Header.Subheader >Never Miss A Pill Again</Header.Subheader>
       </Header.Content>
 

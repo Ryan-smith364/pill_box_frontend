@@ -1,6 +1,6 @@
 import React from 'react';
 import PillSearchForm from './PillSearchForm';
-import PillCollection from '../containers/PillContainer'
+import PillCollection from '../containers/PillCollection'
 
 export default  class PillSearch extends React.Component{
   render(){
@@ -8,7 +8,7 @@ export default  class PillSearch extends React.Component{
       <React.Fragment>
          <PillSearchForm/>
 
-         <PillCollection/>
+         <PillCollection pills={this.props.pills}/>
       </React.Fragment>
     )
   }
