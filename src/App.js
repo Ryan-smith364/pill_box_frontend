@@ -1,6 +1,7 @@
 import './App.css';
 import React from 'react';
-import { Switch, Route} from 'react-router-dom'
+import {connect} from 'react-redux'
+import { Switch, Route, withRouter} from 'react-router-dom'
 import Navbar from  './components/Navbar'
 import Login from './components/Login'
 import Signup from './components/Signup'
@@ -10,23 +11,16 @@ import PillDisplay from './components/PillDisplay';
 import ListDisplay from './components/ListDisplay';
 import ListsDisplay from './components/ListsDisplay';
 import ListForm from './components/ListForm';
+import {fetchPills} from './actions/index'
 // Route, Redirect,
 
 
 
-export default  class App extends React.Component{
-  constructor(){
-    super()
-
-    this.state = {
-      pills: []
-    }
-  }
+class App extends React.Component{
 
   componentDidMount(){
-    fetch('http://localhost:3000/pills')
-    .then(resp => resp.json())
-    .then(json => this.setState({pills : json}))
+    this.props.fetchPills()
+    // this.fetchUsers()
   }
 
   render(){
@@ -39,7 +33,7 @@ export default  class App extends React.Component{
           <Route path={`/lists/display/:id`} component={ListDisplay}/> 
           <Route path={`/pills/display/:id`} component={PillDisplay}/> 
           <Route path='/signup'component={Signup}/> 
-          <Route path='/pills/search'render={() => <PillSearch pills={this.state.pills}/>}/> 
+          <Route path='/pills/search'component={PillSearch}/> 
           <Route path='/new-pill-list'component={ListForm}/> 
           <Route path='/lists/display'component={ListsDisplay}/>
           <Route path='/login'component={Login}/> 
@@ -49,4 +43,10 @@ export default  class App extends React.Component{
       </React.Fragment>
     )
   }
+
 }
+const mapDispatchToProps = (dispatch) => ({
+  fetchPills: () => {dispatch(fetchPills())}
+})
+
+export default withRouter(connect(null, mapDispatchToProps)(App));

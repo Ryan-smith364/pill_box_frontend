@@ -4,6 +4,7 @@ import { Segment, Card, Button } from 'semantic-ui-react';
 
 export default  class PillCard extends React.Component{
   render(){
+     console.log(this.props.pill)
     return (
       <Card
      

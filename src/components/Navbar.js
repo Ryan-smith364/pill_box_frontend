@@ -28,7 +28,7 @@ export default class Navbar extends React.Component{
           </Menu.Item>:
           <Menu.Item>
 
-             <Modal trigger={<Button>Login</Button>}>
+             <Modal trigger={<Button basic color='green'>Login</Button>}>
                 <Modal.Content>
                    <Login/>
                 </Modal.Content>
