@@ -7,7 +7,7 @@ export default  class Home extends React.Component{
     return (
       <React.Fragment>
          
-         <Link to='/new-pill-list'><Button content='New Pill Box'/></Link>
+         <Link to='/new-pill-list'><Button content='New Pill Box' className="color"/></Link>
          <Link to='/pills/search'><Button content='Search Drugs'/></Link>
          <Link to='/lists/display'><Button content='Your Pill Box'/></Link>
          {/* <Link to='/new-pill-list'><Button content='Reminders'/></Link> */}

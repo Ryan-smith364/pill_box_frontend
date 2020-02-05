@@ -15,3 +15,8 @@ code {
     monospace;
 }
 
+
+#create-new-menu-btn{
+  border-radius: 0;
+  background-color: black;
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import PillSearchForm from './PillSearchForm';
-import PillCollection from '../containers/PillCollection'
+// import PillCollection from '../containers/PillCollection'
 import PillCard from '../components/PillCard'
 import { Container, Card } from 'semantic-ui-react';
 

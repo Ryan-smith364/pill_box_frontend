@@ -9,7 +9,7 @@ import PillSearch from './components/PillSearch';
 import Home from './components/Home';
 import PillDisplay from './components/PillDisplay';
 import ListDisplay from './components/ListDisplay';
-import ListsDisplay from './components/ListsDisplay';
+import ListsCollection from './containers/ListCollection';
 import ListForm from './components/ListForm';
 import {fetchPills} from './actions/index'
 // Route, Redirect,
@@ -35,7 +35,7 @@ class App extends React.Component{
           <Route path='/signup'component={Signup}/> 
           <Route path='/pills/search'component={PillSearch}/> 
           <Route path='/new-pill-list'component={ListForm}/> 
-          <Route path='/lists/display'component={ListsDisplay}/>
+          <Route path='/lists/display'component={ListsCollection}/>
           <Route path='/login'component={Login}/> 
           <Route path='/' component={Home}/> 
 
@@ -48,5 +48,6 @@ class App extends React.Component{
 const mapDispatchToProps = (dispatch) => ({
   fetchPills: () => {dispatch(fetchPills())}
 })
+
 
 export default withRouter(connect(null, mapDispatchToProps)(App));

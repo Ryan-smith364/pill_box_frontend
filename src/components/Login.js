@@ -1,28 +1,49 @@
 import React from 'react';
 import { Button, Form, Input, Container} from 'semantic-ui-react'
+import {findUser} from '../actions/index'
+import {withRouter} from 'react-router-dom'
+import {connect} from 'react-redux'
 
+  class Login extends React.Component{
 
-export default  class Login extends React.Component{
+   state = {
+      user: {
+         username: null,
+         password: null
+      }
+   }
+
+   handleChange = (e) => {
+      console.log(e.currentTarget.name)
+
+      this.setState({user:{
+         ...this.state.user,
+         [e.currentTarget.name]: e.currentTarget.value}
+      })
+   }
+
   render(){
     return (
       <React.Fragment>
         <Container>
-         <Form onSubmit={null}>
+         <Form onSubmit={() => this.props.findUser(this.state.user)}>
             <Form.Group widths='equal'>
                <Form.Field
+                  name="username"
                   control={Input}
                   label='Username'
                   placeholder='Username'
-                  onChange={null}
+                  onChange={e => this.handleChange(e)}
                   required
                >
                </Form.Field>
                <Form.Field
+                  name='password'
                   control={Input}
                   type='password'
                   label='Password'
                   placeholder='Password'
-                  onChange={null}
+                  onChange={e => this.handleChange(e)}
                   required
                >
                </Form.Field>
@@ -49,3 +70,10 @@ export default  class Login extends React.Component{
     )
   }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+   findUser: (newUser) => {dispatch(findUser(newUser))}
+ })
+ 
+ export default withRouter(connect(null, mapDispatchToProps)(Login));
+ 

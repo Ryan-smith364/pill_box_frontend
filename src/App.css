@@ -25,3 +25,19 @@ body{
 }
 
 
+/* #bodyId .ui.create-new-menu-btn {
+  border-radius: 0;
+  background-color: black;
+  } */
+
+  .button {
+    background-color: rgb(251, 231, 193) !important;
+    border:  solid rgb(240, 212, 165) !important;
+    border-width: 2px !important;
+  }
+
+  .colomn {
+    background-color: white;
+    border:  solid rgb(240, 212, 165) !important;
+    border-width: 2px !important;
+  }

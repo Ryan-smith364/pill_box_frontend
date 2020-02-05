@@ -15,6 +15,8 @@ export default  class PillSearchForm extends React.Component{
             <Form.Field  
             ></Form.Field>
       
+      {/* Possibly add a form so that on submit I can filter search results */}
+
       </React.Fragment>
     )
   }

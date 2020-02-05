@@ -1,13 +1,16 @@
 import React from 'react'
 import {Header, Button} from 'semantic-ui-react';
 import { Menu, Modal } from 'semantic-ui-react'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import Login from './Login'
 import Signup from './Signup';
+import {connect} from 'react-redux'
 
-export default class Navbar extends React.Component{
+
+ class Navbar extends React.Component{
 
    render(){
+      console.log(this.props)
       return(
          <React.Fragment>
             <Header as='h2'>
@@ -23,19 +26,21 @@ export default class Navbar extends React.Component{
       </Menu.Item>
 
         <Menu.Menu position='right'>
-          {this.props.user === null ? <Menu.Item>
-            <Link onClick={this.props.handleLogOut}>Login Out</Link>
-          </Menu.Item>:
+          {!this.props.currentUser ? 
           <Menu.Item>
-
-             <Modal trigger={<Button basic color='green'>Login</Button>}>
+             <Modal trigger={<Button >Login</Button>}>
                 <Modal.Content>
                    <Login/>
                 </Modal.Content>
              </Modal>
-           
-          </Menu.Item>  }
-          {this.props.user !== null ? 
+         </Menu.Item>:
+         
+          <Menu.Item>
+            <Link onClick={this.props.handleLogOut}>Login Out</Link>
+          </Menu.Item>
+         }
+
+          {!this.props.currentUser ? 
           <Menu.Item>
             
             <Modal trigger={<Button>SignUp</Button>}>
@@ -56,3 +61,8 @@ export default class Navbar extends React.Component{
    }
 
 }
+const mapStateToProps = (state) => {
+   return { currentUser: state.currentUser}
+ }
+
+ export default withRouter(connect(mapStateToProps)(Navbar));

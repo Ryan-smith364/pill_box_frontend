@@ -1,5 +1,6 @@
 import { combineReducers } from "redux"
-import {SET_PILLS} from './actions/types'
+import {SET_PILLS, LOGIN} from './actions/types'
+// import { useStore } from "react-redux";
 
 
 const pillReducer = (state = [], action) => {
@@ -11,8 +12,20 @@ const pillReducer = (state = [], action) => {
    }
  };
 
+
+const userReducer = (state = null, action) => {
+   switch (action.type) {
+      case LOGIN:
+         return action.payload
+   default:
+      return state;
+   }
+}
+
+
 const rootReducer = combineReducers({
-   pills: pillReducer
+   pills: pillReducer,
+   currentUser: userReducer
 })
 
 export default rootReducer
