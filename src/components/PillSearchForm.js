@@ -1,23 +1,33 @@
 import React from 'react';
 import {Form, Input} from 'semantic-ui-react'
-import {onsearch} from '../actions/index'
+import {onSearch} from '../actions/index'
+import {connect} from 'react-redux'
 
-export default  class PillSearchForm extends React.Component{
+class PillSearchForm extends React.Component{
+
   render(){
     return (
       <React.Fragment>
-          <Form.Field
+        <Form> 
+            <Form.Field
                control={Input}
                // label='Search'
                placeholder='Search'
-               onChange={null}
+               onChange={e => this.props.handleChange(e)}
             ></Form.Field>
-            <Form.Field  
-            ></Form.Field>
-      
-      {/* Possibly add a form so that on submit I can filter search results */}
+            <Form.Field>
+
+            </Form.Field>
+         </Form>
+         {/* Possibly add a form so that on submit I can filter search results */}
 
       </React.Fragment>
     )
   }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+   onSearch: (search) => {dispatch(onSearch(search))}
+ })
+
+export default connect(null, mapDispatchToProps)(PillSearchForm)

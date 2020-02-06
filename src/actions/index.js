@@ -59,7 +59,7 @@ function postPillList(pill_list){
 
       fetch('http://localhost:3000/pill_lists', obj)
       .then(resp => resp.json())
-      .then(user => {dispatch(loginUser(user))})
+      // .then(user => {dispatch(loginUser(user))})    //add to current state
       .catch(err => console.warn(err))
    }
 }
@@ -79,6 +79,7 @@ function addPill(listId, pillId){
       fetch('http://localhost:3000/pill_list_joins', obj)
       .then(resp => resp.json())
       .then(join => console.log(join))
+      //add to current state 
       .catch(err => console.warn(err))
    }
 }

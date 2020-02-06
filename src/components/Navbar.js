@@ -36,10 +36,10 @@ import {connect} from 'react-redux'
          </Menu.Item>:
          
           <Menu.Item>
-            <Link onClick={this.props.handleLogOut}>Login Out</Link>
+            <Button onClick={this.props.handleLogOut}>Login Out</Button>
           </Menu.Item>
          }
-
+         
           {!this.props.currentUser ? 
           <Menu.Item>
             

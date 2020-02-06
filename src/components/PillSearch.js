@@ -6,14 +6,23 @@ import PillCard from '../components/PillCard'
 import { Container, Card } from 'semantic-ui-react';
 
 class PillSearch extends React.Component{
+   state = {
+      search: ""
+   }
+
+   handleChange = e => {
+      console.log(e.currentTarget.value)
+      this.setState({ search: e.currentTarget.value.toLowerCase() })
+    }
+
   render(){
     return (
       <React.Fragment>
-         <PillSearchForm/>
+         <PillSearchForm handleChange={this.handleChange}/>
          
          <Container>
           <Card.Group className="stackable" itemsPerRow={4}>
-             {this.props.pills.map(pill => <PillCard pill={pill}/>)}
+             {this.props.pills.filter(pill => pill.name.toLowerCase().includes(this.state.search)).map(pill => <PillCard pill={pill}/>)}
           </Card.Group>
         </Container>
       </React.Fragment>
