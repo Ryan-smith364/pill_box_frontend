@@ -56,12 +56,6 @@ import {connect} from 'react-redux'
                   type='submit'
                >Submit
                </Form.Field>
-               <Form.Field
-                  control={Button}
-                  type='button'
-                  onClick={null}
-               >Cancel
-               </Form.Field>
                
             </Form.Group>
          </Form>

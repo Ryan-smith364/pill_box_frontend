@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import { Container, Modal, Button, Grid } from 'semantic-ui-react';
+import { Container, Modal, Button, Grid, Segment } from 'semantic-ui-react';
 import {addPill} from '../actions/index'
 
 class PillDisplay extends React.Component{
@@ -19,8 +19,9 @@ class PillDisplay extends React.Component{
       <React.Fragment>
          <Container>
             <Grid>
-               <Grid.Row stretched>
-                  <Grid.Column width={8} className="colomn">
+               <Grid.Row stretched padded='vertically'>
+                  <Grid.Column width={7} >
+                     <Segment>
                      <h1>{pill[0].name}</h1>
                      <p>{pill[0].brand}</p>
                      <p>{pill[0].route}</p>
@@ -37,18 +38,21 @@ class PillDisplay extends React.Component{
                                    } 
                            </Modal.Content>
                         </Modal>: null}
+                     </Segment>
+                     <Segment>
                      <p>{pill[0].purpose}</p>
                      <p>{pill[0].dose}</p>
                      <p>{pill[0].description}</p>
+                     </Segment>
                   </Grid.Column>
-                  <Grid.Column width={8} className="colomn">
-                     {/* <Grid.Segment> */}
+                  <Grid.Column width={8} >
+                     <Segment>
                         <p>{pill[0].package_label}</p>
                         <p>{pill[0].pregnancy}</p>
-                     {/* </Grid.Segment> */}
-                     {/* <Grid.Segment> */}
+                     </Segment>
+                     <Segment>
                         <p>{pill[0].warnings}</p>
-                     {/* </Grid.Segment> */}
+                     </Segment>
                   </Grid.Column>
                </Grid.Row>
             </Grid>   

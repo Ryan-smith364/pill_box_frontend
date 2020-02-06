@@ -50,7 +50,7 @@ class Signup extends React.Component{
                   label='Email'
                   placeholder='Email'
                   onChange={e => this.handleChange(e)}
-                   required
+                  
                >
                </Form.Field>
 
@@ -73,7 +73,7 @@ class Signup extends React.Component{
                   label='Last Name'
                   placeholder='Last'
                   onChange={e => this.handleChange(e)}
-                   required
+                  
                >
                </Form.Field>
             </Form.Group>
@@ -108,13 +108,7 @@ class Signup extends React.Component{
                   type='submit'
                >Submit
                </Form.Field>
-               <Form.Field
-                  control={Button}
-                  type='button'
-                  onClick={null}
-               >Cancel
-               </Form.Field>
-               
+           
             </Form.Group>
          </Form>
         </Container>

@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import {connect} from 'react-redux'
-import { Switch, Route, withRouter} from 'react-router-dom'
+import { Switch, Route, withRouter, Redirect} from 'react-router-dom'
 import Navbar from  './components/Navbar'
 import Login from './components/Login'
 import Signup from './components/Signup'
@@ -30,12 +30,17 @@ class App extends React.Component{
         <Navbar/>
         
          <Switch>
-          <Route path={`/lists/display/:id`} component={ListDisplay}/> 
+          <Route path={`/lists/display/:id`} render={() => (this.props.currentUser === null)
+            ? <Redirect to={'/login'} /> : <ListDisplay/>
+              }
+            /> 
           <Route path={`/pills/display/:id`} component={PillDisplay}/> 
           <Route path='/signup'component={Signup}/> 
           <Route path='/pills/search'component={PillSearch}/> 
-          <Route path='/new-pill-list'component={ListForm}/> 
-          <Route path='/lists/display'component={ListsCollection}/>
+          <Route path='/new-pill-list'render={() =>  (this.props.currentUser === null)
+            ? <Redirect to={'/login'} /> : <ListForm/> }/> 
+          <Route path='/lists/display'render={() => (this.props.currentUser === null)
+            ? <Redirect to={'/login'} /> : <ListsCollection/>}/>
           <Route path='/login'component={Login}/> 
           <Route path='/' component={Home}/> 
 
@@ -49,5 +54,8 @@ const mapDispatchToProps = (dispatch) => ({
   fetchPills: () => {dispatch(fetchPills())}
 })
 
+const mapStateToProps = (state) => {
+  return { currentUser: state.currentUser}
+}
 
-export default withRouter(connect(null, mapDispatchToProps)(App));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

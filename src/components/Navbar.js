@@ -5,6 +5,7 @@ import {Link, withRouter} from 'react-router-dom'
 import Login from './Login'
 import Signup from './Signup';
 import {connect} from 'react-redux'
+import {userLogout} from '../actions/index'
 
 
  class Navbar extends React.Component{
@@ -28,7 +29,7 @@ import {connect} from 'react-redux'
         <Menu.Menu position='right'>
           {!this.props.currentUser ? 
           <Menu.Item>
-             <Modal trigger={<Button >Login</Button>}>
+             <Modal trigger={<Button >Login</Button>} closeIcon>
                 <Modal.Content>
                    <Login/>
                 </Modal.Content>
@@ -36,14 +37,14 @@ import {connect} from 'react-redux'
          </Menu.Item>:
          
           <Menu.Item>
-            <Button onClick={this.props.handleLogOut}>Login Out</Button>
+            <Button onClick={this.props.userLogout}>Login Out</Button>
           </Menu.Item>
          }
          
           {!this.props.currentUser ? 
           <Menu.Item>
             
-            <Modal trigger={<Button>SignUp</Button>}>
+            <Modal trigger={<Button>SignUp</Button>} closeIcon>
               <Modal.Content >
                   <Signup/>
                </Modal.Content>
@@ -65,4 +66,8 @@ const mapStateToProps = (state) => {
    return { currentUser: state.currentUser}
  }
 
- export default withRouter(connect(mapStateToProps)(Navbar));
+ const mapDispatchToProps = (dispatch) => ({
+   userLogout: () => {dispatch(userLogout())}
+ })
+
+ export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));

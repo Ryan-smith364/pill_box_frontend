@@ -1,4 +1,4 @@
-import { ON_SEARCH, SET_PILLS, LOGIN, SIGN_UP} from './types'
+import { ON_SEARCH, SET_PILLS, LOGIN, LOGOUT} from './types'
 
 function fetchPills(){
  return (dispatch) => {fetch('http://localhost:3000/pills')
@@ -84,6 +84,10 @@ function addPill(listId, pillId){
    }
 }
 
+function userLogout(){
+   return{ type: LOGOUT, payload: null }
+}
+
 function loginUser(user){
    return{ type: LOGIN, payload: user }
 }
@@ -96,4 +100,4 @@ function onSearch(searchText){
    return {type: ON_SEARCH, payload: searchText}
  }
 
- export {onSearch, fetchPills, createUser, findUser, postPillList, addPill }
+ export {onSearch, fetchPills, createUser, findUser, postPillList, addPill, userLogout }
