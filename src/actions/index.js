@@ -1,4 +1,4 @@
-import { ON_SEARCH, SET_PILLS, LOGIN, LOGOUT} from './types'
+import { ON_SEARCH, SET_PILLS, LOGIN, LOGOUT ,ADD_PILL_LIST, ADD_PILL_TO_LIST} from './types'
 
 function fetchPills(){
  return (dispatch) => {fetch('http://localhost:3000/pills')
@@ -59,29 +59,33 @@ function postPillList(pill_list){
 
       fetch('http://localhost:3000/pill_lists', obj)
       .then(resp => resp.json())
-      // .then(user => {dispatch(loginUser(user))})    //add to current state
+      .then(user => {dispatch(addPillList(user))})    //add to current state
       .catch(err => console.warn(err))
    }
 }
 
-function addPill(listId, pillId){
 
+function addPill(listId, pill){
+   console.log(pill)
    return(dispatch ) => {
       const obj = {
          method: 'POST',
          headers:{ 
             'content-type': 'application/json',
             Accept: 'application/json'
-      },
-      body: JSON.stringify({pill_list_id: listId, pill_id: pillId})
+         },
+         body: JSON.stringify({pill_list_id: listId, pill_id: pill.id})
       }
-
+      
       fetch('http://localhost:3000/pill_list_joins', obj)
       .then(resp => resp.json())
-      .then(join => console.log(join))
-      //add to current state 
+      .then(join => {dispatch(addPillToList(join ,pill))})
       .catch(err => console.warn(err))
    }
+}
+
+function addPillList(list){   
+   return{ type: ADD_PILL_LIST, payload: list}
 }
 
 function userLogout(){
@@ -98,6 +102,11 @@ function setPills(pills){
 
 function onSearch(searchText){
    return {type: ON_SEARCH, payload: searchText}
+ }
+
+ function addPillToList(join, pill){
+    console.log('hit')
+   return {type: ADD_PILL_TO_LIST, payload: {join, pill}}
  }
 
  export {onSearch, fetchPills, createUser, findUser, postPillList, addPill, userLogout }

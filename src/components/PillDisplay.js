@@ -30,7 +30,7 @@ class PillDisplay extends React.Component{
                         <Modal.Content >
                               { this.props.currentUser ?   this.props.currentUser.pill_lists.map(list => 
                                   <div>
-                                     <Button onClick={() => this.props.addPill( list.id, pill[0].id )}>Add</Button>
+                                     <Button onClick={() => this.props.addPill( list.id, pill[0] )}>Add</Button>
                                      <p>{list.name}</p>
                                   </div> 
                                   )

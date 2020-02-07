@@ -7,7 +7,6 @@ import {Button} from 'semantic-ui-react'
 
 class ListCollection extends React.Component{
   render(){
-    console.log(this.props)
     return (
       <React.Fragment>
        

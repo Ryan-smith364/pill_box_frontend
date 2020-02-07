@@ -1,6 +1,6 @@
 import React from 'react';
 import PillCard from '../components/PillCard'
-import { Container, Card } from 'semantic-ui-react';
+import { Container, Card, Segment } from 'semantic-ui-react';
 
 
 export default  class PillCollection extends React.Component{
@@ -8,9 +8,10 @@ export default  class PillCollection extends React.Component{
     return (
       <React.Fragment>
         <Container>
+          { this.props.pills !== [] ?
           <Card.Group className="stackable" itemsPerRow={4}>
              {this.props.pills.map(pill => <PillCard pill={pill}/>)}
-          </Card.Group>
+          </Card.Group> : <Segment><h1>No Pills Found</h1></Segment>}
         </Container>
       </React.Fragment>
     )
