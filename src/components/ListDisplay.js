@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import { Container, Modal, Button, Grid, Segment } from 'semantic-ui-react';
-import  {withRouter} from 'react-router-dom'
+import { Container,  Grid, Segment, Button } from 'semantic-ui-react';
+import  {withRouter, Link} from 'react-router-dom'
 // import ListCollection from '../containers/ListCollection';
 
 
@@ -25,7 +25,7 @@ render(){
                   <p>{pillList[0].desc}</p>
                   </Segment></Grid.Column>
                 <Grid.Column width={8} ><Segment>
-                  {pillList[0].pills.map(pill => <li>{pill.name}</li>)}
+                  {pillList[0].pills.map(pill => <Link to={`/pills/display/${pill.id}`}><Button>{pill.name}</Button></Link>)}
                 </Segment></Grid.Column>
               </Grid.Row>
             </Grid>   

@@ -3,7 +3,7 @@
 }
 
 body{
- background-image: url("./img/waiting_room.png");
+ background-image: url("./img/counter.jpg");
 }
 
 
@@ -36,8 +36,8 @@ body{
     border-width: 2px !important;
   }
 
-  .colomn {
+  /* .colon {
     background-color: white;
     border:  solid rgb(240, 212, 165) !important;
     border-width: 2px !important;
-  }
+  } */

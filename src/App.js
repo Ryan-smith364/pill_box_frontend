@@ -31,16 +31,16 @@ class App extends React.Component{
         
          <Switch>
           <Route path={`/lists/display/:id`} render={() => (this.props.currentUser === null)
-            ? <Redirect to={'/login'} /> : <ListDisplay/>
+            ? <Redirect to='/login' /> : <ListDisplay/>
               }
             /> 
           <Route path={`/pills/display/:id`} component={PillDisplay}/> 
           <Route path='/signup'component={Signup}/> 
           <Route path='/pills/search'component={PillSearch}/> 
           <Route path='/new-pill-list'render={() =>  (this.props.currentUser === null)
-            ? <Redirect to={'/login'} /> : <ListForm/> }/> 
+            ? <Redirect to='/login' /> : <ListForm/> }/> 
           <Route path='/lists/display'render={() => (this.props.currentUser === null)
-            ? <Redirect to={'/login'} /> : <ListsCollection/>}/>
+            ? <Redirect to='/login' /> : <ListsCollection/>}/>
           <Route path='/login'component={Login}/> 
           <Route path='/' component={Home}/> 
 

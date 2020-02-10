@@ -24,6 +24,11 @@ class Signup extends React.Component{
         [e.currentTarget.name]: e.currentTarget.value}
       })
     }
+
+    signUp = () => {
+      this.props.history.push('/')
+      this.props.createUser(this.state.newUser)
+    }
   
 
   render(){
@@ -32,7 +37,7 @@ class Signup extends React.Component{
          
       <React.Fragment>
         <Container>
-         <Form onSubmit={() => this.props.createUser(this.state.newUser)}>
+         <Form onSubmit={() => this.signUp()}>
             <Form.Group widths='equal'>
                <Form.Field
                   control={Input}

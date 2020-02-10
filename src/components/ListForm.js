@@ -49,12 +49,18 @@ class ListForm extends React.Component{
       this.setState({ search: e.currentTarget.value.toLowerCase() })
     }
 
+    makeBox = () => {
+      this.props.postPillList(this.state.list)
+      
+      
+    }
+
   render(){
     return (
 
     <React.Fragment>
         <Container>
-         <Form onSubmit={() => this.props.postPillList(this.state.list)}>
+         <Form onSubmit={() => this.makeBox()}>
             <Form.Group widths='equal'>
                <Form.Field
                   name="name"

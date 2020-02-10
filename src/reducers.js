@@ -1,5 +1,5 @@
 import { combineReducers } from "redux"
-import {SET_PILLS, LOGIN, LOGOUT, ADD_PILL_LIST,  ADD_PILL_TO_LIST} from './actions/types'
+import {SET_PILLS, LOGIN, LOGOUT, ADD_PILL_LIST,  ADD_PILL_TO_LIST, ON_SEARCH} from './actions/types'
 // import { useStore } from "react-redux";
 
 
@@ -7,7 +7,9 @@ const pillReducer = (state = [], action) => {
    switch (action.type) {
      case SET_PILLS:
         return action.payload
-     default:
+      case ON_SEARCH:
+         return action.payload
+      default:
        return state;
    }
  };

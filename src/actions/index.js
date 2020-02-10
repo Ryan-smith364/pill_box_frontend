@@ -41,7 +41,16 @@ function findUser(user){
 
       fetch('http://localhost:3000/users/login', obj)
       .then(resp => resp.json())
-      .then(user => {dispatch(loginUser(user))})
+      .then(user =>  {
+         if(user.error !== true){
+            
+            dispatch(loginUser(user))
+            
+         }
+         else{
+            alert("Username or Password is Incorrect")
+         }
+      })
       .catch(err => console.warn(err))
    }
 }
@@ -59,7 +68,8 @@ function postPillList(pill_list){
 
       fetch('http://localhost:3000/pill_lists', obj)
       .then(resp => resp.json())
-      .then(user => {dispatch(addPillList(user))})    //add to current state
+      .then(user => {dispatch(addPillList(user))}) 
+      .then(resp => console.log(this))   //add to current state
       .catch(err => console.warn(err))
    }
 }
@@ -84,6 +94,25 @@ function addPill(listId, pill){
    }
 }
 
+function onSearch(searchText){
+   console.log('hits')
+   return(dispatch ) => {
+      const obj = {
+         method: 'POST',
+         headers:{ 
+            'content-type': 'application/json',
+            Accept: 'application/json'
+         },
+         body: JSON.stringify({searchText})
+      }
+      
+      fetch('http://localhost:3000/pills/search', obj)
+      .then(resp => resp.json())
+      .then(pills => {dispatch(searchPills(pills))})     
+      .catch(err => console.warn(err))
+   }
+ }
+
 function addPillList(list){   
    return{ type: ADD_PILL_LIST, payload: list}
 }
@@ -100,7 +129,7 @@ function setPills(pills){
    return {type: SET_PILLS, payload: pills}
 }
 
-function onSearch(searchText){
+function searchPills(searchText){
    return {type: ON_SEARCH, payload: searchText}
  }
 
@@ -109,4 +138,4 @@ function onSearch(searchText){
    return {type: ADD_PILL_TO_LIST, payload: {join, pill}}
  }
 
- export {onSearch, fetchPills, createUser, findUser, postPillList, addPill, userLogout }
+ export {onSearch, fetchPills, createUser, findUser, postPillList, addPill, userLogout, searchPills}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, Input, Container} from 'semantic-ui-react'
+import { Button, Form, Input, Container, } from 'semantic-ui-react'
 import {findUser} from '../actions/index'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
@@ -11,6 +11,11 @@ import {connect} from 'react-redux'
          username: null,
          password: null
       }
+   }
+
+   login = ( ) => {
+      this.props.history.push('/')
+      this.props.findUser(this.state.user)
    }
 
    handleChange = (e) => {
@@ -26,7 +31,7 @@ import {connect} from 'react-redux'
     return (
       <React.Fragment>
         <Container>
-         <Form onSubmit={() => this.props.findUser(this.state.user)}>
+         <Form onSubmit={() => this.login()}>
             <Form.Group widths='equal'>
                <Form.Field
                   name="username"

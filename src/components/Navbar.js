@@ -26,6 +26,13 @@ import {userLogout} from '../actions/index'
          
       </Menu.Item>
 
+
+      {this.props.currentUser ? <Link to='/new-pill-list'><Button content='New Pill Box' className="color"/></Link>: null}
+         <Link to='/pills/search'><Button content='Search Pills'/></Link>
+      {this.props.currentUser ? <Link to='/lists/display'><Button content='Your Pill Box'/></Link>: null }
+         {/* <Link to='/new-pill-list'><Button content='Reminders'/></Link> */}
+
+
         <Menu.Menu position='right'>
           {!this.props.currentUser ? 
           <Menu.Item>
@@ -37,7 +44,7 @@ import {userLogout} from '../actions/index'
          </Menu.Item>:
          
           <Menu.Item>
-            <Button onClick={this.props.userLogout}>Login Out</Button>
+            <Button onClick={this.props.userLogout}>LogOut</Button>
           </Menu.Item>
          }
          

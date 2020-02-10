@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 import { Segment, Card, Button } from 'semantic-ui-react';
 
 export default  class AddCard extends React.Component{

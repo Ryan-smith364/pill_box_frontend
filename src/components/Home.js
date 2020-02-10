@@ -9,7 +9,7 @@ class Home extends React.Component{
       <React.Fragment>
             
       {this.props.currentUser ? <Link to='/new-pill-list'><Button content='New Pill Box' className="color"/></Link>: null}
-         <Link to='/pills/search'><Button content='Search Drugs'/></Link>
+         <Link to='/pills/search'><Button content='Search Pills'/></Link>
       {this.props.currentUser ? <Link to='/lists/display'><Button content='Your Pill Box'/></Link>: null }
          {/* <Link to='/new-pill-list'><Button content='Reminders'/></Link> */}
       </React.Fragment>

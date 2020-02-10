@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 import { Container, Modal, Button, Grid, Segment } from 'semantic-ui-react';
 import {addPill} from '../actions/index'
+import {withRouter} from 'react-router-dom'
 
 class PillDisplay extends React.Component{
 
@@ -28,7 +29,7 @@ class PillDisplay extends React.Component{
                      {this.props.currentUser ?  
                         <Modal trigger={<Button>Add To List</Button>}>
                         <Modal.Content >
-                              { this.props.currentUser ?   this.props.currentUser.pill_lists.map(list => 
+                              { this.props.currentUser.pill_lists !== [] ?   this.props.currentUser.pill_lists.map(list => 
                                   <div>
                                      <Button onClick={() => this.props.addPill( list.id, pill[0] )}>Add</Button>
                                      <p>{list.name}</p>
@@ -71,4 +72,4 @@ const mapStateToProps = (state) => {
    }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PillDisplay)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PillDisplay))
