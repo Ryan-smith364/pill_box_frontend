@@ -18,16 +18,17 @@ class PillSearchForm extends React.Component{
     return (
       <React.Fragment>
         <Form onSubmit={() => this.props.onSearch(this.state.search)}> 
-            <Form.Field
-               control={Input}
+            <Input
+              size='large' 
+              icon='search'
                // label='Search'
-               placeholder='Search'
-               onChange={e => this.handleChange(e)}
-            ></Form.Field>
+              placeholder='Search'
+              onChange={e => this.handleChange(e)}
+            />
             <Form.Field>
 
             </Form.Field>
-         </Form>
+         </Form><br/>
          {/* Possibly add a form so that on submit I can filter search results */}
 
       </React.Fragment>

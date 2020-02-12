@@ -1,5 +1,5 @@
 import { combineReducers } from "redux"
-import {SET_PILLS, LOGIN, LOGOUT, ADD_PILL_LIST,  ADD_PILL_TO_LIST, ON_SEARCH} from './actions/types'
+import {SET_PILLS, LOGIN, LOGOUT, ADD_PILL_LIST,  ADD_PILL_TO_LIST, ON_SEARCH, DELETE_PILL_LIST} from './actions/types'
 // import { useStore } from "react-redux";
 
 
@@ -37,6 +37,11 @@ const userReducer = (state = null, action) => {
                               pill_lists: [...filteredLists, newList]
                            }                                    
          return pillState
+      case DELETE_PILL_LIST:
+         const filtered = state.pill_lists.filter(list => list !== action.payload)
+         const updatedState = {...state , pill_lists: filtered}
+                                            
+      return updatedState
    default:
       return state;
    }

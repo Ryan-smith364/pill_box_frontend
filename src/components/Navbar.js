@@ -6,12 +6,13 @@ import Login from './Login'
 import Signup from './Signup';
 import {connect} from 'react-redux'
 import {userLogout} from '../actions/index'
+import EditUser from './EditUser'
 
 
  class Navbar extends React.Component{
 
    render(){
-      console.log(this.props)
+      console.log(this.props.history)
       return(
          <React.Fragment>
             <Header as='h2'>
@@ -22,15 +23,16 @@ import {userLogout} from '../actions/index'
 
       <Menu>
 
-      <Menu.Item>
+      
          
-      </Menu.Item>
+     
+      {this.props.history.location.pathname !== "/"  ?   this.props.currentUser ? <Menu.Menu>
+            <Menu.Item><Link to='/new-pill-list'><Button content='New Pill Box' className="color"/></Link></Menu.Item>
+            <Menu.Item> <Link to='/pills/search'><Button content='Search Pills'/></Link> </Menu.Item>
+            <Menu.Item><Link to='/lists/display'><Button content='Your Pill Box'/></Link> </Menu.Item>
+         </Menu.Menu>: null : null }
 
-
-      {this.props.currentUser ? <Link to='/new-pill-list'><Button content='New Pill Box' className="color"/></Link>: null}
-         <Link to='/pills/search'><Button content='Search Pills'/></Link>
-      {this.props.currentUser ? <Link to='/lists/display'><Button content='Your Pill Box'/></Link>: null }
-         {/* <Link to='/new-pill-list'><Button content='Reminders'/></Link> */}
+         {/* <Link to='/new-pill-list'><Button content='Reminders'/></Link> : null } */}
 
 
         <Menu.Menu position='right'>
@@ -46,6 +48,18 @@ import {userLogout} from '../actions/index'
           <Menu.Item>
             <Button onClick={this.props.userLogout}>LogOut</Button>
           </Menu.Item>
+         }
+
+         {!this.props.currentUser ? 
+            null :
+            <Menu.Item>
+               <Modal trigger={<Button>Edit User</Button>} closeIcon>
+                  <Modal.Content >
+                     <EditUser/>
+                  </Modal.Content>
+               </Modal>
+            </Menu.Item>
+
          }
          
           {!this.props.currentUser ? 

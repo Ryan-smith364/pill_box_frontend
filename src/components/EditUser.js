@@ -1,18 +1,19 @@
 import React from 'react';
 import { Button, Form, Input, Container} from 'semantic-ui-react'
-import {createUser} from '../actions/index'
+import {editUser} from '../actions/index'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
+import PillSearch from './PillSearch';
 
-class Signup extends React.Component{
+class EditUser extends React.Component{
 
    state = {
       newUser:{
-         first_name: null,
-         last_name: null,
-         username: null,
+         first_name: this.props.currentUser.first_name,
+         last_name: this.props.currentUser.last_name,
+         username: this.props.currentUser.username,
          password: null,
-         email: null
+         email: this.props.currentUser.email,
       }
    }
 
@@ -25,9 +26,9 @@ class Signup extends React.Component{
       })
     }
 
-    signUp = () => {
+    sumbit = () => {
       this.props.history.push('/')
-      this.props.createUser(this.state.newUser)
+      this.props.editUser(this.state.newUser, this.props.currentUser.id)
     }
   
 
@@ -37,7 +38,7 @@ class Signup extends React.Component{
          
       <React.Fragment>
         <Container>
-         <Form onSubmit={() => this.signUp()}>
+         <Form onSubmit={() => this.sumbit()}>
             <Form.Group widths='equal'>
                <Form.Field
                   control={Input}
@@ -46,6 +47,7 @@ class Signup extends React.Component{
                   placeholder='Username'
                   onChange={e => this.handleChange(e)}
                   required
+                  value={this.state.newUser.username}
                >
                </Form.Field>
 
@@ -55,6 +57,7 @@ class Signup extends React.Component{
                   label='Email'
                   placeholder='Email'
                   onChange={e => this.handleChange(e)}
+                  value={this.state.newUser.email}
                   
                >
                </Form.Field>
@@ -69,6 +72,7 @@ class Signup extends React.Component{
                   placeholder='First'
                   onChange={e => this.handleChange(e)}
                    required
+                   value={this.state.newUser.first_name}
                >
                </Form.Field>
 
@@ -78,6 +82,7 @@ class Signup extends React.Component{
                   label='Last Name'
                   placeholder='Last'
                   onChange={e => this.handleChange(e)}
+                  value={this.state.newUser.last_name}
                   
                >
                </Form.Field>
@@ -115,8 +120,12 @@ class Signup extends React.Component{
 }
 
 const mapDispatchToProps = (dispatch) => ({
-   createUser: (newUser) => {dispatch(createUser(newUser))}
+   editUser: (user, id) => {dispatch(editUser(user, id))}
  })
- 
- export default withRouter(connect(null, mapDispatchToProps)(Signup));
- 
+
+ const mapStateToProps = (state) => {
+  return {currentUser: state.currentUser}
+}
+
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EditUser))

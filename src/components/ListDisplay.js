@@ -2,12 +2,19 @@ import React from 'react';
 import {connect} from 'react-redux'
 import { Container,  Grid, Segment, Button } from 'semantic-ui-react';
 import  {withRouter, Link} from 'react-router-dom'
+import {deletePillList} from '../actions/index'
+import {deletePill} from '../actions/index'
 // import ListCollection from '../containers/ListCollection';
 
 
 class ListDisplay extends React.Component{
   findPillList = () => {
-    return this.props.currentUser.pill_lists.filter(pillList => pillList.id.toString() === this.props.match.params.id)  
+    return this.props.currentUser.pill_lists.find(pillList => pillList.id.toString() === this.props.match.params.id)  
+ }
+
+ delete = (list) => {
+   this.props.history.push('/lists/display')
+   this.props.deletePillList(list)
  }
 
 render(){
@@ -21,16 +28,22 @@ render(){
             <Grid>
               <Grid.Row stretched padded='vertically'>
                 <Grid.Column width={7} ><Segment>
-                  <h2>{pillList[0].name}</h2>
-                  <p>{pillList[0].desc}</p>
+                  <h2>{pillList.name}</h2>
+                  <p>{pillList.desc}</p>
                   </Segment></Grid.Column>
-                <Grid.Column width={8} ><Segment>
-                  {pillList[0].pills.map(pill => <Link to={`/pills/display/${pill.id}`}><Button>{pill.name}</Button></Link>)}
-                </Segment></Grid.Column>
+                <Grid.Column width={8} ><Segment style={{overflow: 'auto', maxHeight: 550 }}>
+                  <nav>
+                    <ul>
+                      {pillList.pills.map(pill => <React.Fragment>  <li><Link to={`/pills/display/${pill.id}`}><Button>{pill.name}</Button></Link> <Button onClick={() => this}>X</Button> </li></React.Fragment>)}
+                    </ul>
+                  </nav> 
+               </Segment></Grid.Column>
               </Grid.Row>
             </Grid>   
           </Container>
 
+
+      <Button onClick={() => this.delete(pillList)}>Delete Pill Box</Button>
 
       </React.Fragment>
     )
@@ -38,6 +51,17 @@ render(){
 }
 
 const mapStateToProps = (state) => {
-  return { currentUser: state.currentUser}
+  return { currentUser: state.currentUser
+          }
 }
-export default withRouter(connect(mapStateToProps)(ListDisplay))
+
+const mapDispatchToProps = (dispatch) => {
+  return{
+
+  deletePillList: (list) => {dispatch(deletePillList(list))},
+  deletePill: (pill) => {dispatch(deletePill(pill))}
+
+  }
+} 
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ListDisplay))

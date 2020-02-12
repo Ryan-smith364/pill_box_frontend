@@ -3,18 +3,20 @@ import {connect} from 'react-redux'
 import { Container, Modal, Button, Grid, Segment } from 'semantic-ui-react';
 import {addPill} from '../actions/index'
 import {withRouter} from 'react-router-dom'
+import ListForm from './ListForm';
 
 class PillDisplay extends React.Component{
 
    findPill = () => {
-      return this.props.pills.filter(pill => pill.id.toString() === this.props.match.params.id)  
+      return this.props.pills.find(pill => pill.id.toString() === this.props.match.params.id)  
    }
 
   render(){
 
       console.log(this.props.match.params.id, this.props.pills)
       const pill = this.findPill()
-      console.log(pill[0])
+      console.log(pill)
+      // debugger
     return (
 
       <React.Fragment>
@@ -23,36 +25,36 @@ class PillDisplay extends React.Component{
                <Grid.Row stretched padded='vertically'>
                   <Grid.Column width={7} >
                      <Segment>
-                     <h1>{pill[0].name}</h1>
-                     <p>{pill[0].brand}</p>
-                     <p>{pill[0].route}</p>
+                     <h1>{pill.name}</h1>
+                     <p>{pill.brand}</p>
+                     <p>{pill.route}</p>
                      {this.props.currentUser ?  
                         <Modal trigger={<Button>Add To List</Button>}>
                         <Modal.Content >
-                              { this.props.currentUser.pill_lists !== [] ?   this.props.currentUser.pill_lists.map(list => 
+                              { this.props.currentUser.pill_lists !== [] ?   this.props.currentUser.pill_lists.map(list =>
                                   <div>
-                                     <Button onClick={() => this.props.addPill( list.id, pill[0] )}>Add</Button>
                                      <p>{list.name}</p>
-                                  </div> 
-                                  )
-                                   : null 
+                                     {list.pills.find(find => find.id === pill.id) !== undefined ? <Button >Added</Button> : <Button onClick={() => this.props.addPill( list.id, pill )}>Add</Button>}
+                                  </div>      
+                              )
+                                   : <ListForm/>
                                    } 
                            </Modal.Content>
                         </Modal>: null}
                      </Segment>
                      <Segment>
-                     <p>{pill[0].purpose}</p>
-                     <p>{pill[0].dose}</p>
-                     <p>{pill[0].description}</p>
+                     <p>{pill.purpose}</p>
+                     <p>{pill.dose}</p>
+                     <p>{pill.description}</p>
                      </Segment>
                   </Grid.Column>
                   <Grid.Column width={8} >
                      <Segment>
-                        <p>{pill[0].package_label}</p>
-                        <p>{pill[0].pregnancy}</p>
+                        <p>{pill.package_label}</p>
+                        <p>{pill.pregnancy}</p>
                      </Segment>
                      <Segment>
-                        <p>{pill[0].warnings}</p>
+                        <p>{pill.warnings}</p>
                      </Segment>
                   </Grid.Column>
                </Grid.Row>

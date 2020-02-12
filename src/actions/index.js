@@ -1,4 +1,5 @@
-import { ON_SEARCH, SET_PILLS, LOGIN, LOGOUT ,ADD_PILL_LIST, ADD_PILL_TO_LIST} from './types'
+import { ON_SEARCH, SET_PILLS, LOGIN, LOGOUT ,ADD_PILL_LIST,
+    ADD_PILL_TO_LIST, DELETE_PILL_LIST} from './types'
 
 function fetchPills(){
  return (dispatch) => {fetch('http://localhost:3000/pills')
@@ -42,13 +43,11 @@ function findUser(user){
       fetch('http://localhost:3000/users/login', obj)
       .then(resp => resp.json())
       .then(user =>  {
-         if(user.error !== true){
-            
-            dispatch(loginUser(user))
-            
+         if('error' in user){
+            alert("Username or Password is Incorrect")
          }
          else{
-            alert("Username or Password is Incorrect")
+            dispatch(loginUser(user))  
          }
       })
       .catch(err => console.warn(err))
@@ -56,7 +55,9 @@ function findUser(user){
 }
 
 function postPillList(pill_list){
+ 
    return(dispatch ) => {
+
       const obj = {
          method: 'POST',
          headers:{ 
@@ -69,15 +70,36 @@ function postPillList(pill_list){
       fetch('http://localhost:3000/pill_lists', obj)
       .then(resp => resp.json())
       .then(user => {dispatch(addPillList(user))}) 
-      .then(resp => console.log(this))   //add to current state
+      .catch(err => console.warn(err))
+
+   }
+}
+
+function deletePillList(list){
+   
+   return (dispatch) => {
+      let id = list.id
+      
+      const obj = {
+         method: 'DELETE',
+         headers:{ 
+            'content-type': 'application/json',
+            'Accept': 'application/json'
+         }
+      }
+      
+      
+      fetch(`http://localhost:3000/pill_lists/${id}`, obj) 
+      .then(resp => resp.json())
+      .then( json => {dispatch(deletePillListLive(list))})
       .catch(err => console.warn(err))
    }
 }
 
 
 function addPill(listId, pill){
-   console.log(pill)
    return(dispatch ) => {
+      console.log(pill)
       const obj = {
          method: 'POST',
          headers:{ 
@@ -94,6 +116,49 @@ function addPill(listId, pill){
    }
 }
 
+function deletePill(userId, pillId){
+   
+   // return (dispatch) => {
+  
+      
+   //    const obj = {
+   //       method: 'DELETE',
+   //       headers:{ 
+   //          'content-type': 'application/json',
+   //          'Accept': 'application/json'
+   //       },body: JSON.stringify({userId, pillId})
+   //    }
+      
+      
+   //    fetch(`http://localhost:3000/pill_lists_join/${id}`, obj) 
+   //    .then(resp => resp.json())
+   //    .then(console.log('deleted'))
+   //    // .then( json => {dispatch(deletePillLive(list))})
+   //    .catch(err => console.warn(err))
+   // }
+}
+
+function editUser(userObj, userId){
+
+   console.log(userObj)
+return (dispatch) => {
+  
+      const obj = {
+         method: 'PATCH',
+         headers:{ 
+            'content-type': 'application/json',
+            'Accept': 'application/json'
+         },body: JSON.stringify({userObj})
+      }
+      
+      fetch(`http://localhost:3000/users/${userId}`, obj) 
+      .then(resp => resp.json())
+      .then(editedUser => {dispatch(loginUser(editedUser))}) 
+      // .then( json => {dispatch(deletePillLive(list))})
+      .catch(err => console.warn(err))
+   }
+}
+
 function onSearch(searchText){
    console.log('hits')
    return(dispatch ) => {
@@ -106,9 +171,16 @@ function onSearch(searchText){
          body: JSON.stringify({searchText})
       }
       
-      fetch('http://localhost:3000/pills/search', obj)
+      fetch('http://localhost:3000/pills/search?limit=100', obj)
       .then(resp => resp.json())
-      .then(pills => {dispatch(searchPills(pills))})     
+      .then(pills => {
+         console.log(pills)
+         if(pills.length === 0){
+            alert(`No Pills Found With The Name '${searchText}'`)
+         }
+         else{
+            {dispatch(searchPills(pills))}
+         }})
       .catch(err => console.warn(err))
    }
  }
@@ -134,8 +206,18 @@ function searchPills(searchText){
  }
 
  function addPillToList(join, pill){
-    console.log('hit')
+   
    return {type: ADD_PILL_TO_LIST, payload: {join, pill}}
  }
 
- export {onSearch, fetchPills, createUser, findUser, postPillList, addPill, userLogout, searchPills}
+ function deletePillListLive(list){
+   console.log(list)
+  return {type: DELETE_PILL_LIST, payload: list}
+}
+ 
+// function loading(){
+//    return{type: ON_SEARCH}
+// }
+
+ export {onSearch, fetchPills, createUser, findUser, postPillList, addPill,
+    userLogout, searchPills, deletePillList, deletePill, editUser}
