@@ -54,7 +54,7 @@ function findUser(user){
    }
 }
 
-function postPillList(pill_list){
+function postPillList(pill_list, time){
  
    return(dispatch ) => {
 
@@ -64,7 +64,7 @@ function postPillList(pill_list){
             'content-type': 'application/json',
             Accept: 'application/json'
       },
-      body: JSON.stringify({pill_list})
+      body: JSON.stringify({pill_list, time})
       }
 
       fetch('http://localhost:3000/pill_lists', obj)
@@ -72,6 +72,29 @@ function postPillList(pill_list){
       .then(user => {dispatch(addPillList(user))}) 
       .catch(err => console.warn(err))
 
+   }
+}
+
+function nextDay(pill_list){
+   return () => {
+   
+      const date = new Date(parseInt(pill_list.time))
+      date.setDate(date.getDate() + 1)
+      const num = date.getTime()
+     
+      const milli = num.toString()
+
+      const obj = {
+         method: 'PATCH',
+         headers:{ 
+            'content-type': 'application/json',
+            'Accept': 'application/json'
+         },body: JSON.stringify({ pill_list, date: milli})
+      }
+      
+      fetch(`http://localhost:3000/pill_lists/${pill_list.id}`, obj) 
+      .then(resp => resp.json()) 
+      .catch(err => console.warn(err))
    }
 }
 
@@ -220,4 +243,4 @@ function searchPills(searchText){
 // }
 
  export {onSearch, fetchPills, createUser, findUser, postPillList, addPill,
-    userLogout, searchPills, deletePillList, deletePill, editUser}
+    userLogout, searchPills, deletePillList, deletePill, editUser, nextDay}

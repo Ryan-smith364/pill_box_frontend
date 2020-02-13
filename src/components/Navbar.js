@@ -1,13 +1,13 @@
 import React from 'react'
 import {Header, Button} from 'semantic-ui-react';
-import { Menu, Modal } from 'semantic-ui-react'
+import { Menu, Modal, Image } from 'semantic-ui-react'
 import {Link, withRouter} from 'react-router-dom'
 import Login from './Login'
 import Signup from './Signup';
 import {connect} from 'react-redux'
 import {userLogout} from '../actions/index'
 import EditUser from './EditUser'
-
+import logo from '../img/Pillbox_TP.png'
 
  class Navbar extends React.Component{
 
@@ -17,7 +17,7 @@ import EditUser from './EditUser'
          <React.Fragment>
             <Header as='h2'>
       <Header.Content>
-        <Link to='/' > PillBox </Link>
+        <Link to='/' > <Image src={logo} size='medium' /></Link>
         <Header.Subheader >Never Miss A Pill Again</Header.Subheader>
       </Header.Content>
 

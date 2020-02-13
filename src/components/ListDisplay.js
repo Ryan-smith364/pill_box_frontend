@@ -17,6 +17,11 @@ class ListDisplay extends React.Component{
    this.props.deletePillList(list)
  }
 
+ reminderDate = (time) => {
+  let date = new Date(parseInt(time))
+  return date.toString()
+ }
+
 render(){
     // console.log(this.props.match.params.id, this.props.pillLists)
     console.log(this.props)
@@ -27,14 +32,15 @@ render(){
           <Container>
             <Grid>
               <Grid.Row stretched padded='vertically'>
-                <Grid.Column width={7} ><Segment>
+                <Grid.Column width={8} ><Segment>
                   <h2>{pillList.name}</h2>
                   <p>{pillList.desc}</p>
+                  <p> Reminder time : { this.reminderDate(pillList.time) }</p>
                   </Segment></Grid.Column>
                 <Grid.Column width={8} ><Segment style={{overflow: 'auto', maxHeight: 550 }}>
                   <nav>
                     <ul>
-                      {pillList.pills.map(pill => <React.Fragment>  <li><Link to={`/pills/display/${pill.id}`}><Button>{pill.name}</Button></Link> <Button onClick={() => this}>X</Button> </li></React.Fragment>)}
+                      {pillList.pills.map(pill => <React.Fragment>  <li><Link to={`/pills/display/${pill.id}`}><Button>{pill.name}</Button></Link></li></React.Fragment>)}
                     </ul>
                   </nav> 
                </Segment></Grid.Column>

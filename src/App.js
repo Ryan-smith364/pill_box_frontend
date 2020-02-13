@@ -12,6 +12,8 @@ import ListDisplay from './components/ListDisplay';
 import ListsCollection from './containers/ListCollection';
 import ListForm from './components/ListForm';
 import {fetchPills} from './actions/index'
+import Reminder from './components/Reminder';
+
 // Route, Redirect,
 
 
@@ -36,6 +38,7 @@ class App extends React.Component{
             /> 
           <Route path={`/pills/display/:id`} component={PillDisplay}/> 
           <Route path='/signup'component={Signup}/> 
+          <Route path='/reminders'component={Reminder}/> 
           <Route path='/pills/search'component={PillSearch}/> 
           <Route path='/new-pill-list'render={() =>  (this.props.currentUser === null)
             ? <Redirect to='/login' /> : <ListForm/> }/> 

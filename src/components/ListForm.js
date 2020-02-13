@@ -16,31 +16,47 @@ class ListForm extends React.Component{
          name: null,
          desc: null,
          user_id: this.props.currentUser.id,
-         frequency: 'as needed',
-         freqNum: 0,
-         pills: []
+         pills: [],
       },
       search: '',
-      time:'12:00'
+      check: false,
+      time: "1:00",
+      hour: '1',
+      minute: '00'
 
    }
 
-   // change = e => {this.setState({list: { 
-   //    ...this.state.list,
-   //       frequency: e.currentTarget.innerText.toLocaleLowerCase() }
-   //    })}
+   showClock = () => {
+      if(this.state.check){
+         this.setState({check: false})
+      }
+      else{
+         this.setState({check: true})
+      }
+   }
 
-   // changeFreq = e => {this.setState({list: { 
-   //    ...this.state.list,
-   //    freqNum: e.currentTarget.value }
-   //    })}
    
-   onChange = time=> {this.setState({time})}
+   
+   onChange = e => { const timeArr = e.split(':')
+   this.setState({
+      time: e
+   })
+      console.log(timeArr)
+
+      this.setState({
+         hour: timeArr[0]
+      })
+
+      this.setState({
+         minute: timeArr[1]
+      })
+
+   
+}
 
    
    handleChange = e => {
-      // debugger
-      console.log(e.currentTarget.name)
+   
       this.setState({ list: {
         ...this.state.list,
         [e.currentTarget.name]: e.currentTarget.value}
@@ -65,23 +81,29 @@ class ListForm extends React.Component{
     }
 
     handleSearch = e => {
-      console.log(e.currentTarget.value)
       this.setState({ search: e.currentTarget.value.toLowerCase() })
     }
 
     makeBox = (e) => {
       e.currentTarget.reset()
+      const date = new Date()
+      date.setHours(this.state.hour)
+      date.setMinutes(this.state.minute)
+      date.setDate(date.getDate() + 1)
+      console.log(date.getTime())
+      
       this.props.history.push('/lists/display')
-      this.props.postPillList(this.state.list)
+      this.props.postPillList(this.state.list, date.getTime())
       this.setState({
          list: {
             name: null,
             desc: null,
             user_id: this.props.currentUser.id,
-            // frequency: 'as needed',
-            // freqNum: 0,
             pills: []
-         }
+         },
+         hours: '1',
+         minutes: '00',
+         time:'1:00'
       })
     }
 
@@ -130,11 +152,11 @@ class ListForm extends React.Component{
 
               <Segment>
                   <h1>Schedule Reminder</h1>
-
-                  <TimePicker
-                     onChange={this.onChange}
+               <Button onClick={() => this.showClock()} type="button" > Set Reminder? </Button>
+                  {this.state.check ? <TimePicker
+                     onChange={e => this.onChange(e)}
                      value={this.state.time}
-                  />
+                  />: null}
 
                </Segment>
 
@@ -183,7 +205,7 @@ class ListForm extends React.Component{
   }
 }
 const mapDispatchToProps = (dispatch) => { return{
-   postPillList: (list) => {dispatch(postPillList(list))},
+   postPillList: (list, time) => {dispatch(postPillList(list, time))},
    onSearch: (search) => {dispatch(onSearch(search))}
  }
 }
