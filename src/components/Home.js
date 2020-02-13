@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button, Segment, Container, Header } from 'semantic-ui-react'
+import { Button, Segment, Container, Header, Image } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux'
-
+import QR from '../img/QR.png'
 
 
 class Home extends React.Component{
@@ -29,10 +29,12 @@ class Home extends React.Component{
             </p>
           </Container>
         </Segment>
+
+      <Image src={QR} size='medium' centered/>
+
       </React.Fragment>
 
 
-      
 
     )
   }
