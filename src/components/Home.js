@@ -18,19 +18,19 @@ class Home extends React.Component{
       {this.props.currentUser ?   <Link to='/reminders'><Button content='Reminders'/></Link> : null}
 
          
-        <Segment>
-          <Container text>
-            <Header as="h3">Our Background</Header>
-            <p>
+        <Segment class="home_container">
+          <Container text >
+            <Header  as="h3">Our Background</Header>
+            <p class="home_container" > 
               Pill Box is a multi puropse tool for assiting you for your medication needs. Rather it's for
                setting reminders to take your pills, or just checking information on the pills you take.
-                PillBox uses all FDA suppored information, so you know what we provide suppored information 
+                PillBox uses all FDA provided information, so you know what we provide correct information 
                 for our users.
             </p>
           </Container>
         </Segment>
-
-      <Image src={QR} size='medium' centered/>
+      <Segment><h5 class="home_container" >Developer Info</h5></Segment>
+      <Image src={QR} size='small' centered/>
 
       </React.Fragment>
 

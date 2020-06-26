@@ -25,9 +25,7 @@ class PillSearchForm extends React.Component{
               placeholder='Search'
               onChange={e => this.handleChange(e)}
             />
-            <Form.Field>
-
-            </Form.Field>
+           
          </Form><br/>
          {/* Possibly add a form so that on submit I can filter search results */}
 

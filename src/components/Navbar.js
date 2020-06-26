@@ -1,4 +1,3 @@
-import React from 'react'
 import {Header, Button} from 'semantic-ui-react';
 import { Menu, Modal, Image } from 'semantic-ui-react'
 import {Link, withRouter} from 'react-router-dom'
@@ -8,6 +7,7 @@ import {connect} from 'react-redux'
 import {userLogout} from '../actions/index'
 import EditUser from './EditUser'
 import logo from '../img/Pillbox_TP.png'
+import React from 'react'
 
  class Navbar extends React.Component{
 
@@ -35,8 +35,8 @@ import logo from '../img/Pillbox_TP.png'
          {/* <Link to='/new-pill-list'><Button content='Reminders'/></Link> : null } */}
 
 
-        <Menu.Menu position='right'>
-          {!this.props.currentUser ? 
+      <Menu.Menu position='right'>
+         {!this.props.currentUser ? 
           <Menu.Item>
              <Modal trigger={<Button >Login</Button>} closeIcon>
                 <Modal.Content>
